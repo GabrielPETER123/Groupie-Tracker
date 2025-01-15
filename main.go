@@ -55,6 +55,8 @@ func main() {
 	getRelation()
 }
 
+
+//** Fonction pour récupérer les données de l'API */
 func getArtists() {
 	//** GET l'API d'Artists*/
     respArt, err := http.Get("https://groupietrackers.herokuapp.com/api/artists")
