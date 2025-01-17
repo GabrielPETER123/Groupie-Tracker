@@ -78,8 +78,6 @@ func GetArtists() []Artists {
 	//** Supression du fichier artists.json */
     if err := os.Remove("JSON/artists.json"); err != nil {
         fmt.Println("Erreur lors de la suppression du fichier:", err)
-    } else {
-        fmt.Println("Le fichier dates.json a été supprimé")
     }
 
 	//** Création du fichier artists.json */
@@ -97,8 +95,6 @@ func GetArtists() []Artists {
         fmt.Println("Erreur lors de l'encodage JSON:", err)
         os.Exit(1)
     }
-
-    fmt.Println("Les données des artistes ont été écrites dans artists.json")
     return artists
 }
 
@@ -127,8 +123,6 @@ func GetDates() IndexDates {
 	//** Supression du fichier dates.json */
     if err := os.Remove("JSON/dates.json"); err != nil {
         fmt.Println("Erreur lors de la suppression du fichier:", err)
-    } else {
-        fmt.Println("Le fichier dates.json a été supprimé")
     }
 
 	//** Création du fichier dates.json */
@@ -146,8 +140,6 @@ func GetDates() IndexDates {
         fmt.Println("Erreur lors de l'encodage JSON:", err)
         os.Exit(1)
     }
-
-    fmt.Println("Les données des artistes ont été écrites dans dates.json")
     return index
 }
 
@@ -176,8 +168,6 @@ func GetLocations() IndexLocations{
 	//** Supression du fichier locations.json */
 	if err := os.Remove("JSON/locations.json"); err != nil {
 		fmt.Println("Erreur lors de la suppression du fichier:", err)
-	} else {
-		fmt.Println("Le fichier locations.json a été supprimé")
 	}
 
 	//** Création du fichier locations.json */
@@ -195,8 +185,6 @@ func GetLocations() IndexLocations{
 		fmt.Println("Erreur lors de l'encodage JSON:", err)
 		os.Exit(1)
 	}
-
-	fmt.Println("Les données des artistes ont été écrites dans locations.json")
     return index
 }
 
@@ -225,8 +213,6 @@ func GetRelation() IndexRelation {
     //** Supression du fichier relation.json */
     if err := os.Remove("JSON/relation.json"); err != nil {
         fmt.Println("Erreur lors de la suppression du fichier:", err)
-    } else {
-        fmt.Println("Le fichier relation.json a été supprimé")
     }
 
     //** Création du fichier relation.json */
@@ -244,7 +230,5 @@ func GetRelation() IndexRelation {
         fmt.Println("Erreur lors de l'encodage JSON:", err)
         os.Exit(1)
     }
-
-    fmt.Println("Les données des artistes ont été écrites dans relation.json")
     return index
 }

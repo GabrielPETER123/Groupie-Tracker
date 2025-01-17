@@ -1,0 +1,11 @@
+Infos à Display :
+
+Nom du groupe :
+- Membre(s)
+- Image du groupe
+- Date de Création
+- Date du premier album
+
+Partie intéractive :
+* Liste de toutes les dates de concert + intéraction on-click go to the map
+* GG MAP  => Lieux + Date Liée

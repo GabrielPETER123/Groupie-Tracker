@@ -1,0 +1,11 @@
+/** DARK MODE */
+body {
+    background-color: #333;
+    color: #fff;
+  }
+  
+  a, a:visited {
+    color: black;
+    text-decoration: none;
+  }
+  
