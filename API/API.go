@@ -53,7 +53,7 @@ type IndexRelation struct {
 
 
 //** Fonction pour récupérer les données de l'API */
-func GetArtists() {
+func GetArtists() []Artists {
 	//** GET l'API d'Artists*/
     respArt, err := http.Get("https://groupietrackers.herokuapp.com/api/artists")
     if err != nil {
@@ -99,9 +99,10 @@ func GetArtists() {
     }
 
     fmt.Println("Les données des artistes ont été écrites dans artists.json")
+    return artists
 }
 
-func GetDates() {
+func GetDates() IndexDates {
 	//** GET l'API de Dates*/
     respDate, err := http.Get("https://groupietrackers.herokuapp.com/api/dates")
     if err != nil {
@@ -147,9 +148,10 @@ func GetDates() {
     }
 
     fmt.Println("Les données des artistes ont été écrites dans dates.json")
+    return index
 }
 
-func GetLocations() {
+func GetLocations() IndexLocations{
 	//** GET l'API de Locations*/
 	respLoc, err := http.Get("https://groupietrackers.herokuapp.com/api/locations")
 	if err != nil {
@@ -195,52 +197,54 @@ func GetLocations() {
 	}
 
 	fmt.Println("Les données des artistes ont été écrites dans locations.json")
+    return index
 }
 
-func GetRelation() {
-//** GET l'API de Relation*/
-respRel, err := http.Get("https://groupietrackers.herokuapp.com/api/relation")
-if err != nil {
-	fmt.Println("Erreur lors de la requête:", err)
-	os.Exit(1)
-}
-defer respRel.Body.Close()
+func GetRelation() IndexRelation {
+    //** GET l'API de Relation*/
+    respRel, err := http.Get("https://groupietrackers.herokuapp.com/api/relation")
+    if err != nil {
+        fmt.Println("Erreur lors de la requête:", err)
+        os.Exit(1)
+    }
+    defer respRel.Body.Close()
 
-if respRel.StatusCode != http.StatusOK {
-	fmt.Println("Erreur de réponse:", respRel.Status)
-	os.Exit(1)
-}
+    if respRel.StatusCode != http.StatusOK {
+        fmt.Println("Erreur de réponse:", respRel.Status)
+        os.Exit(1)
+    }
 
-var index IndexRelation
+    var index IndexRelation
 
-//** Décodeur de la réponse JSON selon la structure relation */
-if err := json.NewDecoder(respRel.Body).Decode(&index); err != nil {
-	fmt.Println("Erreur lors du décodage JSON:", err)
-	os.Exit(1)
-}
+    //** Décodeur de la réponse JSON selon la structure relation */
+    if err := json.NewDecoder(respRel.Body).Decode(&index); err != nil {
+        fmt.Println("Erreur lors du décodage JSON:", err)
+        os.Exit(1)
+    }
 
-//** Supression du fichier relation.json */
-if err := os.Remove("JSON/relation.json"); err != nil {
-	fmt.Println("Erreur lors de la suppression du fichier:", err)
-} else {
-	fmt.Println("Le fichier relation.json a été supprimé")
-}
+    //** Supression du fichier relation.json */
+    if err := os.Remove("JSON/relation.json"); err != nil {
+        fmt.Println("Erreur lors de la suppression du fichier:", err)
+    } else {
+        fmt.Println("Le fichier relation.json a été supprimé")
+    }
 
-//** Création du fichier relation.json */
-file, err := os.Create("JSON/relation.json")
-if err != nil {
-	fmt.Println("Erreur lors de la création du fichier:", err)
-	os.Exit(1)
-}
-defer file.Close()
+    //** Création du fichier relation.json */
+    file, err := os.Create("JSON/relation.json")
+    if err != nil {
+        fmt.Println("Erreur lors de la création du fichier:", err)
+        os.Exit(1)
+    }
+    defer file.Close()
 
-//** Écriture sur le fichier */
-encoder := json.NewEncoder(file)
-encoder.SetIndent("", "  ") //Sert à mettre en forme pour une meilleure lisibilité
-if err := encoder.Encode(index); err != nil {
-	fmt.Println("Erreur lors de l'encodage JSON:", err)
-	os.Exit(1)
-}
+    //** Écriture sur le fichier */
+    encoder := json.NewEncoder(file)
+    encoder.SetIndent("", "  ") //Sert à mettre en forme pour une meilleure lisibilité
+    if err := encoder.Encode(index); err != nil {
+        fmt.Println("Erreur lors de l'encodage JSON:", err)
+        os.Exit(1)
+    }
 
-fmt.Println("Les données des artistes ont été écrites dans relation.json")
+    fmt.Println("Les données des artistes ont été écrites dans relation.json")
+    return index
 }
